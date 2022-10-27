@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="d-flex m-3 p-3 justify-content-around">
+    <div class="col-5">
+        <h2>{{response.name}} favorito</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Number of pages</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in response.favorites %}
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>{{book.title}}</td>
+                    <td>{{book.num_of_pages}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-5 p-3 bg-dark">
+        <h2 class="text-warning">add author favorite</h2>
+        <form action="/authors/{{response.id}}" method="POST">
+            <label for="book" class="form-label text-light">Book:</label>
+            <select class="form-select" aria-label="Default select example" id="book" name="book">
+                {% for book in books_unfav %}
+                <option value="{{book.id}}">{{book.title}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" value="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>
+<a href="/" class="btn btn-primary">Home</a>
+{% endblock %}

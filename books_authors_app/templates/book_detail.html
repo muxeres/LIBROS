@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="d-flex m-3 p-3 justify-content-around">
+    <div class="col-5">
+        <h2>title {{books.title}}</h2>
+        <div>
+            <h3>favorited by:</h3>
+            {% for author in books.favorites %}
+            <p>{{author.name}}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-5 p-3 bg-dark">
+        <h2 class="text-warning">add books favorite</h2>
+        <form action="/books/{{books.id}}" method="POST">
+            <label for="author" class="form-label text-light">Author:</label>
+            <select class="form-select" aria-label="Default select example" id="author" name="author">
+                {% for author in authors_unfav %}
+                <option value="{{author.id}}">{{author.name}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" value="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>
+<a href="/" class="btn btn-primary">Home</a>
+{% endblock %}
